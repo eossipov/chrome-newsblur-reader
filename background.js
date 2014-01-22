@@ -1,10 +1,11 @@
+var readHashes = new Array();
+
 function httpRequest(address, method) {
     var req = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
     req.open(method, address, false);
     req.send(null);
     return req;
 }
-
 function checkLogin() {
     var req = httpRequest('http://www.newsblur.com/rss_feeds/search_feed', 'GET');
     if(req.status == 200)
@@ -14,7 +15,6 @@ function checkLogin() {
     }
     else return false;
 }
-
 function getFeeds() {
     if(checkLogin())
     {
@@ -28,7 +28,6 @@ function getFeeds() {
     }
     else return -1;
 }
-
 function updateNotification(feeds) {
     if(feeds == -1)
     {
@@ -59,9 +58,6 @@ function updateNotification(feeds) {
         chrome.browserAction.setBadgeText({ text: count });
     }
 }
-
-var readHashes = new Array();
-
 function markStoriesRead() {
     if(readHashes.length == 0) return;
     var hashes = 'story_hash=' + readHashes.join('&story_hash=');
