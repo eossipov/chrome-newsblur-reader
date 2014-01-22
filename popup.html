@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Unofficial NewsBlur Extension</title>
+        <style>
+        body {
+            background: #444;
+            font-family: sans-serif;
+            margin: 0px;
+            min-width: 500px;
+            overflow-x: hidden;
+        }
+        
+        div#content {
+			width: 520px;
+            max-height: 400px;
+            overflow-y: scroll;
+        }
+        
+        div.toplinks {
+			color: #fff;
+            margin: 5px;
+            font-size: small;
+            font-weight: bold;
+        }
+        
+        div.toplinks a {
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        div#totalUnread {
+            overflow: hidden;
+        }
+        
+        div#totalUnread > div {
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 0px;
+            font-size: large;
+            color: #fff;
+            float: left;
+            width: 172px;
+            border-right: 1px solid #888;
+            border-left: 1px solid #444;
+        }
+        
+        div#totalUnread > div:first-child {
+            border-left: 0px;
+        }
+        
+        div#totalUnread > div:last-child {
+            border-right: 0px;
+        }
+        
+        div#psTotalUnread, div.psstory {
+            background: #080;
+            border-width: 1px 0 1px 0;
+            border-style: solid;
+            border-top-color: #0a0;
+            border-bottom-color: #060;
+        }
+        
+        div#ntTotalUnread, div.ntstory {
+            background: #888;
+            border-width: 1px 0 1px 0;
+            border-style: solid;
+            border-top-color: #aaa;
+            border-bottom-color: #666;
+        }
+        
+        div#ngTotalUnread, div.ngstory {
+            background: #800;
+            border-width: 1px 0 1px 0;
+            border-style: solid;
+            border-top-color: #a00;
+            border-bottom-color: #600;
+        }
+        
+        div#totalUnread div:last-child {
+            margin: 0px;
+        }
+        
+        div#feedOut > div.feedTitle {
+            width: 494px;
+            background: #444;
+            padding: 5px;
+            border-width: 1px 0 1px 0;
+            border-style: solid;
+            border-top-color: #666;
+            border-bottom-color: #222;
+        }
+        
+        div#feedOut > div.feedTitle a > img {
+            cursor: pointer;
+        }
+        
+        div#feedOut > div.feedTitle > p {
+            padding: 0px;
+            margin: 0px;
+            color: #fff;
+        }
+        
+        div#feedOut > div.feedTitle > h1 {
+            vertical-align: middle;
+            max-width: 350px;
+            font-size: medium;
+            font-weight: bold;
+            float: left;
+            margin: 4px 0px;
+            padding: 0px;
+            color: #fff;
+        }
+        
+        div#feedOut > div.feedTitle > div {
+            width: 135px;
+            overflow: hidden;
+        }
+        
+        div#feedOut > div.feedTitle > div > div {
+            border-radius: 5px;
+            float: left;
+            text-align: center;
+            width: 30px;
+            height: 16px;
+            vertical-align: middle;
+            font-size: medium;
+            font-weight: bold;
+            padding: 5px;
+            margin: 0 0 0 5px;
+            color: #fff;
+        }
+        
+        div.story {
+            width: 494px;
+            padding: 5px;
+            font-size: small;
+            overflow: hidden;
+            color: #fff;
+        }
+        
+        div.story:last-child {
+            margin-bottom: 0px;
+        }
+        
+        div.story a {
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        div.story > h2 { 
+            font-size: medium;
+            margin: 0px;
+            padding: 0px;
+            width: 450px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        div.story:hover h2 {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: none;
+        }
+		
+		a.nextpage {
+			padding: 5px;
+			width: 242px;
+			float: right;
+			background: #000;
+			color: #fff;
+			text-decoration: none;
+			text-align: right;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		
+		a.prevpage {
+			padding: 5px;
+			width: 241px;
+			border-right: 1px solid #fff;
+			float: left;
+			background: #000;
+			color: #fff;
+			text-decoration: none;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		
+		div.addFeed {
+			overflow: hidden;
+			clear: both;
+		}
+		
+		div.addFeed > * {
+			float: left;
+		}
+		
+		div.addFeed > input[type=text] {
+			width: 200px;
+		}
+		
+		div.addFeed > input[type=button] {
+			width: 114px;
+		}
+		
+		div.dropDownContainer > select {
+			width: auto;
+		}
+		
+		div.addFeed select {
+			width: 98%;
+			height: 22px;
+			padding: 1px;
+			margin: 2px;
+		}
+        </style>
+
+        <!--
+        - JavaScript and HTML must be in separate files: see our Content Security
+        - Policy documentation[1] for details and explanation.
+        -
+        - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+        -->
+        <script src="popup.js"></script>
+    </head>
+    <body>
+		<div class="toplinks">
+			<!--span style="float: left;"><strong>Add a Feed:</strong></span-->
+			<a id="openNewsBlur" style="float: right; cursor:pointer;">Visit NewsBlur</a>
+        </div>
+		<!--div class="addFeed">
+			<input type="text" id="feedURL" />
+			<div class="dropDownContainer" style="width: 200px;">
+				<select id="folders"></select>
+			</div>
+			<input type="button" id="bAddFeed" value="Add Feed" />
+		</div-->
+        <div id="content" style="clear: both; overflow: hidden;">
+            <div id="totalUnread">
+                <div id="psTotalUnread"></div>
+                <div id="ntTotalUnread"></div>
+                <div id="ngTotalUnread"></div>
+            </div>
+        </div>
+        <div id="content" style="clear: both;">
+            <div id="feedOut"></div>
+        </div>
+    </body>
+</html>
+
