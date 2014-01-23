@@ -369,12 +369,12 @@ function loadFolders() {
 	document.getElementById('bAddFeed').onclick = function () {
 		var url = document.getElementById('feedURL').value;
 		var req = httpRequest('http://www.newsblur.com/reader/add_url?url='+escape(url), 'POST');
+		//currently returns req.status = 500 (Server Error)
 		if(req.status == 200)
 		{
 			var reqJSON = JSON.parse(req.responseText);
-			
+			//use JSON response here
 		}
-		alert(req.status);
 	};
 }
 function loopFolder(folder, level) {
